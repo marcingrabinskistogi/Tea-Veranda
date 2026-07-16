@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tea Veranda • Authentic Ceylon Teas • Clevedon</title>
+    <meta name="description" content="Family-run tearoom in Clevedon serving premium Ceylon loose-leaf teas, homemade scones, light lunches and beautiful afternoon tea.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --pale-cream: #F9F3E6;
+            --warm-brown: #8B5A2B;
+            --soft-mid: #B8B0A6;
+            --text-dark: #3A2E23;
+            --soft-green: #6B8E63;
+            --shadow: 0 4px 20px rgba(139, 90, 43, 0.15);
+            --radius: 50px;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--pale-cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+            position: relative;
+        }
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url("images/afternoon-tea-menu.jpeg") center/cover no-repeat fixed;
+            opacity: 0.06; z-index: -1;
+        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--warm-brown); }
+        .container { width: 92%; max-width: 1100px; margin: 0 auto; }
+
+        /* Header */
+        header {
+            background: var(--pale-cream); padding: 1.2rem 0;
+            position: sticky; top: 0; z-index: 999; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .nav-wrap { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 700; color: var(--warm-brown); text-decoration: none; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-dark); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--warm-brown); }
+        .mobile-menu { display: none; font-size: 1.8rem; cursor: pointer; color: var(--text-dark); }
+
+        /* Hero Section — YOUR NEW PHOTO AS BACKGROUND */
+        .hero {
+            min-height: 90vh; display: flex; align-items: center; text-align: center;
+            background: linear-gradient(rgba(184, 176, 166, 0.82), rgba(184, 176, 166, 0.82)),
+                        url("images/teapot-scones-new.jpeg") center/cover no-repeat;
+            color: white;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4rem); margin-bottom: 1.2rem; line-height: 1.2;
+            color: white; font-weight: 600;
+        }
+        .hero p { font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: 2.5rem; max-width: 750px; margin-inline: auto; }
+        .btn-group { display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+        .btn {
+            display: inline-block; width: min(90%, 320px); padding: 1.1rem 2rem;
+            text-decoration: none; border-radius: var(--radius); font-weight: 600; font-size: 1.2rem;
+            transition: all 0.3s; border: none; cursor: pointer;
+        }
+        .btn-primary { background: var(--warm-brown); color: white; }
+        .btn-secondary { background: white; color: var(--warm-brown); }
+        .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+        /* Sections */
+        section { padding: 4.5rem 0; }
+        .section-heading { text-align: center; margin-bottom: 2.5rem; font-size: clamp(1.7rem, 4vw, 2.2rem); position: relative; }
+        .section-heading::after {
+            content: ""; width: 70px; height: 3px; background: var(--soft-green);
+            position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+        }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+        .img-responsive { width: 100%; border-radius: 16px; box-shadow: var(--shadow); object-fit: cover; height: 340px; }
+        .panel { background: rgba(255,255,255,0.7); padding: 2rem; border-radius: 16px; }
+
+        /* Menu Layouts */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; margin-top: 2rem; }
+        .menu-block h3 { font-size: 1.2rem; margin-bottom: 0.8rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--soft-green); }
+        .menu-block ul { list-style: none; }
+        .menu-block li { padding: 0.3rem 0; }
+
+        /* Iced Drinks Grid */
+        .drinks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .drink-card { background: rgba(255,255,255,0.8); padding: 1.2rem; border-radius: 16px; text-align: center; transition: transform 0.3s; }
+        .drink-card:hover { transform: translateY(-5px); }
+        .drink-photo { width: 100%; height: 150px; border-radius: 10px; margin-bottom: 0.8rem; background-size: cover; background-position: center; }
+        .mojito { background-image: url("images/mojito-ice-tea.jpeg"); }
+        .grapefruit { background-image: url("images/pink-ice-tea.jpeg"); }
+        .berries { background-image: url("images/summer-ice-tea.jpeg"); }
+        .peach { background-image: url("images/peach-ice-tea.jpeg"); }
+        .americano { background-image: url("images/americano-ice-coffee.jpeg"); }
+        .latte { background-image: url("images/latte-ice-coffee.jpg"); }
+
+        /* Opening Times */
+        .time-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px dotted var(--soft-green); }
+        .closed { color: #B83C38; font-weight: 600; }
+
+        /* Footer */
+        footer { background: var(--text-dark); color: white; padding: 3rem 1.5rem; text-align: center; border-radius: 16px; margin: 1rem; }
+        footer h3 { color: white; margin-bottom: 1rem; }
+        footer p { margin-bottom: 0.5rem; opacity: 0.85; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu { display: block; }
+            .two-col { grid-template-columns: 1fr; gap: 1.8rem; }
+            .img-responsive { height: 260px; }
+            body { background-attachment: scroll; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="container nav-wrap">
+        <a href="/" class="logo">The Tea Veranda</a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#welcome">Welcome</a></li>
+                <li><a href="#teas">Tea Menu</a></li>
+                <li><a href="#food">Food & Treats</a></li>
+                <li><a href="#iced">Iced Drinks</a></li>
+                <li><a href="#offers">Offers</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#visit">Visit</a></li>
+                <li><a href="#book">Book</a></li>
+                <li><a href="#gifts">Gifts</a></li>
+                <li><a href="#social">Social</a></li>
+            </ul>
+            <div class="mobile-menu">☰</div>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero — YOUR NEW PHOTO AS BACKGROUND -->
+<section class="hero">
+    <div class="container">
+        <h1>Traditional Tea & Treats in Clevedon</h1>
+        <p>Hand-picked Ceylon teas, homemade scones, light lunches, and unforgettable afternoon tea — served with warmth at The Tea Veranda.</p>
+        <div class="btn-group">
+            <a href="#book" class="btn btn-primary">Book Your Table</a>
+            <a href="#teas" class="btn btn-secondary">View Our Menu</a>
+        </div>
+    </div>
+</section>
+
+<!-- Welcome -->
+<section id="welcome">
+    <div class="container">
+        <h2 class="section-heading">Welcome to The Tea Veranda</h2>
+        <div class="two-col">
+            <div class="panel">
+                <p>Nestled in the heart of Clevedon, we bring you the finest premium Ceylon tea alongside classic homemade treats and fresh light lunches. Our space is designed to feel like a warm, welcoming escape — perfect for a break from exploring the pier, meeting friends, or a special occasion.</p>
+                <br>
+                <p>Every pot of tea is brewed with care, and all our cakes, scones, and savoury dishes are made fresh daily using quality ingredients.</p>
+            </div>
+            <img src="images/tea-plant-sky.jpeg" alt="Ceylon Tea Plantations" class="img-responsive">
+        </div>
+    </div>
+</section>
+
+<!-- Tea Menu -->
+<section id="teas" style="background: rgba(255,255,255,0.4); border-radius: 16px; margin: 0 1rem;">
+    <div class="container">
+        <h2 class="section-heading">Our Tea Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-block panel">
+                <h3>🫖 Premium Black Teas</h3>
+                <ul>
+                    <li>Black Ceylon Tea</li>
+                    <li>English Breakfast</li>
+                    <li>Earl Grey</li>
+                    <li>Balmoral Blend</li>
+                    <li>Cherry & Almond</li>
+                    <li>Duchess Blend</li>
+                    <li>Palm Paradise</li>
+                    <li>Rose Congou</li>
+                    <li>Apricot Peach</li>
+                    <li>Grapefruit</li>
+                    <li>Citrus Lemon</li>
+                </ul>
+            </div>
+            <div class="menu-block panel">
+                <h3>🍓 Fruit Teas</h3>
+                <ul>
+                    <li>Tropical Mango</li>
+                    <li>Berryola</li>
+                    <li>Teddy Bear</li>
+                    <li>Berry Fruit Tea</li>
+                </ul>
+                <h3 style="margin-top: 1.5rem;">🌿 Royal Green Tea</h3>
+                <ul>
+                    <li>Pomegranate & Hibiscus</li>
+                    <li>Jasmine</li>
+                    <li>Oolong</li>
+                </ul>
+            </div>
+            <div class="menu-block panel">
+                <h3>🌼 Herbal Teas</h3>
+                <ul>
+                    <li>Peppermint</li>
+                    <li>Chamomile & Rose</li>
+                    <li>Chamomile & Mint</li>
+                    <li>Chamomile & Lavender</li>
+                </ul>
+                <h3 style="margin-top: 1.5rem;">☕ Coffee</h3>
+                <ul>
+                    <li>Freshly Ground Filter Coffee</li>
+                    <li>Freshly Ground French Press Coffee</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Food & Treats -->
+<section id="food">
+    <div class="container">
+        <h2 class="section-heading">Food & Sweet Treats</h2>
+        <img src="images/scones-teapot-set.jpeg" alt="Scones, Cakes & Light Lunches" class="img-responsive" style="max-width: 700px; margin: 0 auto 2rem; display: block;">
+        <p style="text-align: center; font-style: italic; margin-bottom: 2rem;">Our famous Afternoon Tea — a wonderful selection of sandwiches, scones, cakes and fresh fruit</p>
+        <div class="menu-grid">
+            <div class="menu-block panel">
+                <h3>🥐 Light Bites & Lunches</h3>
+                <ul>
+                    <li>Fresh Scones with Clotted Cream & Jam</li>
+                    <li>Afternoon Tea</li>
+                    <li>Soup of the Day <em>(seasonal only)</em></li>
+                    <li>Sandwiches & Toasties</li>
+                    <li>Cheese & Savoury Platter <em>(seasonal only)</em></li>
+                    <li>Ham and Cheese Croissants</li>
+                    <li>Cheese Scones with Olives and Chutney</li>
+                    <li>Frittata with Crisps</li>
+                    <li>Varieties of Sandwiches with Crisps</li>
+                </ul>
+            </div>
+            <div class="menu-block panel">
+                <h3>🍰 Cakes & Sweets</h3>
+                <ul>
+                    <li>Homemade Lemon Drizzle Cake</li>
+                    <li>Strawberry Fruit Tarts</li>
+                    <li>Macarons & Pastries</li>
+                    <li>Signature Biscoff Cake</li>
+                    <li>and many more depending on season</li>
+                </ul>
+            </div>
+            <div class="menu-block panel">
+                <h3>🥤 Other Drinks</h3>
+                <ul>
+                    <li>Soft Drinks & Juices</li>
+                    <li>Hot Chocolate <em>(seasonal only)</em></li>
+                    <li>Premium Fruit Infusions</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; font-style: italic; margin-top: 1.5rem;">Prices available in store or by phone — please ask!</p>
+    </div>
+</section>
+
+<!-- Iced Drinks -->
+<section id="iced" style="background: rgba(255,255,255,0.4); border-radius: 16px; margin: 0 1rem;">
+    <div class="container">
+        <h2 class="section-heading">❄️ Iced Teas & Coffees</h2>
+        <p style="text-align: center; margin-bottom: 1rem;">Refreshing chilled favourites — perfect for sunny days!</p>
+        <div class="drinks-grid">
+            <div class="drink-card">
+                <div class="drink-photo mojito"></div>
+                <h4>Mojito Mint</h4>
+            </div>
+            <div class="drink-card">
+                <div class="drink-photo grapefruit"></div>
+                <h4>Pink Grapefruit</h4>
+            </div>
+            <div class="drink-card">
+                <div class="drink-photo berries"></div>
+                <h4>Summer Berries</h4>
+            </div>
+            <div class="drink-card">
+                <div class="drink-photo peach"></div>
+                <h4>Peach Ice</h4>
+            </div>
+            <div class="drink-card">
+                <div class="drink-photo americano"></div>
+                <h4>Iced Americano</h4>
+            </div>
+            <div class="drink-card">
+                <div class="drink-photo latte"></div>
+                <h4>Iced Latte</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Offers & Events -->
+<section id="offers">
+    <div class="container">
+        <h2 class="section-heading">Special Offers</h2>
+        <div class="panel" style="max-width: 600px; margin: 0 auto; text-align: center; font-size: 1.1rem;">
+            <p>🫖 Tea & Scone Combo</p>
+            <p>📅 Midweek Afternoon Tea Special</p>
+            <p>🇱🇰 Ceylon Loose Tea — Take-Home Offers</p>
+            <p>🍰 Homemade Cake of the Day</p>
+        </div>
+    </div>
+</section>
+
+<section id="events" style="background: rgba(255,255,255,0.4); border-radius: 16px; margin: 0 1rem;">
+    <div class="container">
+        <h2 class="section-heading">Private Events</h2>
+        <p style="text-align: center; margin-bottom: 1rem;">Let us host your special occasion in our beautiful tearoom!</p>
+        <div class="panel" style="max-width: 600px; margin: 0 auto; text-align: center; font-size: 1.1rem;">
+            <p>✨ Baby Showers</p>
+            <p>✨ Birthday Celebrations</p>
+            <p>✨ Anniversaries</p>
+            <p>✨ Christmas Parties & Festive Gatherings</p>
+            <p style="margin-top: 1rem;">Contact us to arrange your bespoke event menu!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Visit Us -->
+<section id="visit">
+    <div class="container">
+        <h2 class="section-heading">Visit Us</h2>
+        <div class="two-col">
+            <div class="panel">
+                <h3 style="text-align: center;">📍 Location</h3>
+                <p style="text-align: center;">
+                    The Tea Veranda<br>
+                    30 Hill Road<br>
+                    Clevedon<br>
+                    North Somerset<br>
+                    BS21 7PH
+                </p>
+                <h3 style="text-align: center; margin-top: 2rem;">⏰ Opening Hours</h3>
+                <div style="max-width: 320px; margin: 0 auto;">
+                    <div class="time-row"><span>Saturday</span><span>10:00am – 5:00pm</span></div>
+                    <div class="time-row"><span>Sunday</span><span>10:00am – 3:00pm</span></div>
+                    <div class="time-row"><span>Monday</span><span>10:00am – 5:00pm</span></div>
+                    <div class="time-row"><span>Tuesday</span><span>10:00am – 5:00pm</span></div>
+                    <div class="time-row"><span>Wednesday</span><span>10:00am – 5:00pm</span></div>
+                    <div class="time-row"><span>Thursday</span><span class="closed">— CLOSED —</span></div>
+                    <div class="time-row"><span>Friday</span><span>10:00am – 5:00pm</span></div>
+                </div>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <p>📞 Telephone: <strong>07455 213 660</strong></p>
+                    <p>📧 Email: <strong>clevedon@theteaveranda.com</strong></p>
+                </div>
+            </div>
+            <img src="images/window-front-logo.jpeg" alt="The Tea Veranda Shop Front" class="img-responsive">
+        </div>
+    </div>
+</section>
+
+<!-- Book & Gifts -->
+<section id="book" style="background: rgba(255,255,255,0.4); border-radius: 16px; margin: 0 1rem;">
+    <div class="container">
+        <h2 class="section-heading">Book Your Table</h2>
+        <div class="two-col">
+            <img src="images/cup-table-view.jpeg" alt="Relax at The Tea Veranda" class="img-responsive">
+            <div class="panel" style="text-align: center;">
+                <p>Reserve your table for a wonderful tea experience!</p>
+                <p style="font-size: 1.1rem; margin: 1rem 0;">📞 Call: <strong>07455 213 660</strong></p>
+                <a href="mailto:clevedon@theteaveranda.com?subject=Table Booking" class="btn btn-primary">Email Booking</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gifts">
+    <div class="container">
+        <h2 class="section-heading">Gift Vouchers</h2>
+        <div class="two-col">
+            <div class="panel" style="text-align: center;">
+                <p>The perfect gift for any tea lover!</p>
+                <p>Any value • Valid 12 months</p>
+                <a href="mailto:clevedon@theteaveranda.com?subject=Gift Voucher" class="btn btn-primary">Order Voucher</a>
+            </div>
+            <img src="images/voucher-hand-gift.jpeg" alt="Gift Vouchers" class="img-responsive">
+        </div>
+    </div>
+</section>
+
+<!-- Follow Us -->
+<section id="social" style="background: rgba(255,255,255,0.4); border-radius: 16px; margin: 0 1rem;">
+    <div class="container" style="text-align: center;">
+        <h2 class="section-heading">Follow Us</h2>
+        <img src="images/lunch-stand-menu.jpeg" alt="Our Menus & Updates" class="img-responsive" style="max-width: 500px; margin: 0 auto 1.5rem;">
+        <p style="font-size: 1.1rem;">
+            📘 Facebook: <strong>VerandaClevedon</strong><br>
+            📷 Instagram: <strong>the_tea_veranda_clevedon</strong><br>
+            📍 Tag us in your photos!
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <h3>The Tea Veranda • Clevedon</h3>
+    <p>Family Run • Authentic Ceylon Teas • Unique Charm</p>
+    <p>30 Hill Road, Clevedon BS21 7PH • Tel: 07455 213 660</p>
+    <p>&copy; 2026 The Tea Veranda. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
